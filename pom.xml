@@ -33,6 +33,11 @@
     <artifactId>mssql-jdbc</artifactId>
     <version>11.1.2.jre8-preview</version>
 </dependency>
+<dependency>
+    <groupId>net.sourceforge.tess4j</groupId>
+    <artifactId>tess4j</artifactId>
+    <version>4.0.0</version>
+</dependency>
 
     </dependencies>
     <properties>

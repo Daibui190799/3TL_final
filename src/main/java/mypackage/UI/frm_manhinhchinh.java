@@ -9,12 +9,17 @@ import java.awt.Font;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import net.sourceforge.tess4j.ITesseract;
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
 
 /**
  *
@@ -61,6 +66,8 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
         btn_MHN_NhanVien = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btn_MHN_HoaDon = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         MainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -301,6 +308,15 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Checkin đặt trước");
+
+        jButton1.setText("Hình ảnh");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
@@ -314,6 +330,12 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(btn_MHN_HoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,7 +353,11 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
                 .addComponent(btn_MHN_HoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_MHN_ThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(306, Short.MAX_VALUE))
+                .addGap(69, 69, 69)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         MainPanel.setBackground(new java.awt.Color(150, 196, 200));
@@ -550,6 +576,54 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
         MainPanel.validate();
     }//GEN-LAST:event_btn_MHN_HoaDonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         JFileChooser jFileChooser = new JFileChooser("E:\\SUMER2022\\test hinh anh report");
+          jFileChooser.showOpenDialog(this);
+      //  File imageFile = new File("E:\\testNB\\test111\\Untitled.png");
+       File imageFile = jFileChooser.getSelectedFile();
+     
+       
+       
+       
+        ITesseract instance = new Tesseract(); 
+        instance.setDatapath("E:\\SUMER2022\\Tess4J-3.4.8-src\\Tess4J\\tessdata");
+        System.err.println(instance.getClass().getName().toString());
+        try {
+            String result = instance.doOCR(imageFile);
+            System.out.println(result);
+//             String[] splits = result.split("-");
+//            for (String item : splits)
+//            System.out.println(item);
+            
+            
+            System.out.println(result.indexOf("Ten Khach Hang:"));
+            System.out.println(result.indexOf("So Dien Thoai:"));
+            System.out.println(result.indexOf("So Phong:"));
+            System.out.println(result.indexOf("Ngay bat dau :"));
+            System.out.println(result.indexOf("Ngay ket thuc :"));
+            
+            frm_ChitietPhong ctp = new frm_ChitietPhong();
+            ctp.setVisible(true);
+            
+            
+            String ten =result.substring(46, 61);
+            String sdt =result.substring(77,87);
+           // System.out.println(result.substring(46, 61));
+            System.out.println(result.substring(77,87));
+            System.out.println(result.substring(98,101));
+            System.out.println(result.substring(117,127));
+            System.out.println(result.substring(144));
+            
+          //  result.substring(61,80);
+    
+            
+ 
+        } catch (TesseractException e) {
+            System.err.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -593,9 +667,11 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
     private javax.swing.JButton btn_MHN_NhanVien;
     private javax.swing.JButton btn_MHN_SoDoPhong;
     private javax.swing.JButton btn_MHN_ThongKe;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbl_MHC_TenHienThi;
     private javax.swing.JLabel lbldongho;
@@ -644,5 +720,6 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
         btn.setBackground(Color.decode("#6363C6"));
 
     }
+    
 
 }
