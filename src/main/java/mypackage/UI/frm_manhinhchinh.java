@@ -4,6 +4,11 @@
  */
 package mypackage.UI;
 
+import com.qlks3tl.DAO.PhieuDangKiDAO;
+import com.qlks3tl.DAO.PhongDAO;
+import com.qlks3tl.Model.PhieuDangKi;
+import com.qlks3tl.Model.Phong;
+import com.qlks3tl.utils.getinfo;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Panel;
@@ -308,7 +313,17 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setBackground(new java.awt.Color(150, 196, 200));
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/HinhAnh/Icon_CheckIn.png"))); // NOI18N
         jLabel4.setText("Checkin đặt trước");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         jButton1.setText("Hình ảnh");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -330,12 +345,12 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(btn_MHN_HoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1))
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,11 +368,11 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
                 .addComponent(btn_MHN_HoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_MHN_ThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
-                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addGap(71, 71, 71)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         MainPanel.setBackground(new java.awt.Color(150, 196, 200));
@@ -578,10 +593,17 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        // TODO add your handling code here:
          JFileChooser jFileChooser = new JFileChooser("E:\\SUMER2022\\test hinh anh report");
           jFileChooser.showOpenDialog(this);
       //  File imageFile = new File("E:\\testNB\\test111\\Untitled.png");
        File imageFile = jFileChooser.getSelectedFile();
+            imageFile.getAbsolutePath();
      
        
        
@@ -591,29 +613,54 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
         System.err.println(instance.getClass().getName().toString());
         try {
             String result = instance.doOCR(imageFile);
-            System.out.println(result);
+        //    System.out.println(result);
 //             String[] splits = result.split("-");
 //            for (String item : splits)
 //            System.out.println(item);
             
-            
-            System.out.println(result.indexOf("Ten Khach Hang:"));
-            System.out.println(result.indexOf("So Dien Thoai:"));
-            System.out.println(result.indexOf("So Phong:"));
-            System.out.println(result.indexOf("Ngay bat dau :"));
-            System.out.println(result.indexOf("Ngay ket thuc :"));
-            
+            // System.out.println(result.indexOf("MaPhieuDangKy:"));
+           // System.out.println(result.indexOf("Ten Khach Hang:"));
+           
+          //  System.out.println(result.indexOf("So Phong:"));
+          //  System.out.println(result.indexOf("Ngay bat dau :"));
+          //  System.out.println(result.indexOf("Ngay ket thuc :"));
+           String mapdk = result.substring(45,47);
+           int mapdk3= Integer.parseInt(mapdk);
+           
+           getinfo.getmapdk= mapdk;
+           System.out.println(result.substring(45,47));
+           PhieuDangKiDAO pdkdao= new PhieuDangKiDAO();
+           
+           PhieuDangKi pdk= new  PhieuDangKi();
+           Phong phong= new Phong();
+           PhongDAO phdao= new PhongDAO();
+           
             frm_ChitietPhong ctp = new frm_ChitietPhong();
             ctp.setVisible(true);
+            pdk = pdkdao.selectbyMAPDK(mapdk3);
             
             
-            String ten =result.substring(46, 61);
-            String sdt =result.substring(77,87);
-           // System.out.println(result.substring(46, 61));
-            System.out.println(result.substring(77,87));
-            System.out.println(result.substring(98,101));
-            System.out.println(result.substring(117,127));
-            System.out.println(result.substring(144));
+            System.out.println(pdk);
+            
+            
+            ctp.setForm(phdao.selectebyID(pdk.getSoPhong()),pdk);
+            
+            
+            // select string  , mapdk int
+           // int a= Integer.valueOf(mapdk);
+           // String.valueOf(a);
+           
+            
+           
+            
+            
+           // String ten =result.substring(46, 61);
+           // String sdt =result.substring(77,87);
+          
+           // System.out.println(result.substring(77,87));
+           // System.out.println(result.substring(98,101));
+          //  System.out.println(result.substring(117,127));
+          //  System.out.println(result.substring(144));
             
           //  result.substring(61,80);
     
@@ -622,7 +669,7 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
         } catch (TesseractException e) {
             System.err.println(e.getMessage());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments

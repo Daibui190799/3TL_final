@@ -566,8 +566,10 @@ void init() {
         }
         lbl_ChiTietPhong_TongTienPhong.setText(String.valueOf(tongtien) + "00" );
         setlocktypedata();
+        
 
     }
+    
 
     public void setlocktypedata() {
         // set type data

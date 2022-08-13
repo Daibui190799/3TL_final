@@ -574,7 +574,7 @@ void inPhieuDatPhong(){
     
     txt_indatphong.append("\t PHIEU DAT PHONG KHACH SAN 3TL \n\n");
     
-    txt_indatphong.append("MaPhieuDangKy: "+" 1" +"\n");
+    txt_indatphong.append("MaPhieuDangKy: "+" 22   " +"\n");
     txt_indatphong.append("Ten Khach Hang: "+" Nguyen Van Test \n");
     
     txt_indatphong.append("So Dien Thoai: "+ "0900000009 \n");
@@ -582,6 +582,7 @@ void inPhieuDatPhong(){
     txt_indatphong.append("Ngay bat dau : "+ "2022-09-09 \n");
     txt_indatphong.append("Ngay ket thuc : "+ "2022-09-10 \n");
     
+    txt_indatphong.setEditable(false);
 }
 
 }

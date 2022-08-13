@@ -69,6 +69,14 @@ public class PhieuDangKiDAO extends QLKSDAO<PhieuDangKi, String>{
         }
         return list.get(list.size()-1);
  }
+      public PhieuDangKi selectbyMAPDK(int id){
+         List<PhieuDangKi> list = this.selectbySql("SELECT * FROM Phieu_DK WHERE MaPDK = ?", id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+         
+     }
 
     @Override
     public List<PhieuDangKi> selectAll() {
