@@ -467,7 +467,8 @@ public class frm_DatPhong extends javax.swing.JFrame {
         btn_DatPhong_In.setEnabled(false);
         btn_DatPhong_GuiMail.setEnabled(false);
         btn_DatPhong_Xem.setEnabled(false);
-        this.dispose();
+       GuiMail gui= new GuiMail();
+        gui.setVisible(true);
         }
         
     }//GEN-LAST:event_btn_DatPhong_GuiMailActionPerformed
