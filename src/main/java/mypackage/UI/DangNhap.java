@@ -56,6 +56,12 @@ public class DangNhap extends javax.swing.JFrame {
 
         txt_DangNhap_taikhoan.setBackground(new java.awt.Color(99, 99, 198));
         txt_DangNhap_taikhoan.setForeground(new java.awt.Color(255, 255, 255));
+        txt_DangNhap_taikhoan.setText("NVQL");
+        txt_DangNhap_taikhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_DangNhap_taikhoanActionPerformed(evt);
+            }
+        });
         jPanel2.add(txt_DangNhap_taikhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 338, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -67,6 +73,7 @@ public class DangNhap extends javax.swing.JFrame {
 
         txt_Dangnhap_matkhau.setBackground(new java.awt.Color(99, 99, 198));
         txt_Dangnhap_matkhau.setForeground(new java.awt.Color(255, 255, 255));
+        txt_Dangnhap_matkhau.setText("123");
         jPanel2.add(txt_Dangnhap_matkhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 338, -1));
 
         btn_DangNhap_Thoat.setBackground(new java.awt.Color(99, 99, 198));
@@ -111,6 +118,10 @@ public class DangNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
         dangNhap();
     }//GEN-LAST:event_btn_DangNhap_dangnhapActionPerformed
+
+    private void txt_DangNhap_taikhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_DangNhap_taikhoanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_DangNhap_taikhoanActionPerformed
 
     /**
      * @param args the command line arguments

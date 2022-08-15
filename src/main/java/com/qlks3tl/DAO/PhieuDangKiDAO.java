@@ -25,6 +25,9 @@ public class PhieuDangKiDAO extends QLKSDAO<PhieuDangKi, String>{
     String SELECT_ALL_SQL = "SELECT * FROM Phieu_DK";
     String SELECT_BY_ID_SQL = "SELECT * FROM Phieu_DK WHERE MaPDK = ?";
     String SELECT_BY_ID_SP = "SELECT * FROM Phieu_DK WHERE SoPhong = ?";
+    String SELECT_BY_ID_SPFalseTTHD = "select * from Phieu_DK where SoPhong = ? and TinhTrangHoaDon = 0 and TinhTrangCho = 0";
+    
+    
     @Override
     public void insert(PhieuDangKi entity) {
           try {
@@ -77,6 +80,13 @@ public class PhieuDangKiDAO extends QLKSDAO<PhieuDangKi, String>{
         return list.get(0);
          
      }
+        public PhieuDangKi selectebySP_FalseTTHoaDOn(String id) {
+     List<PhieuDangKi> list = this.selectbySql(SELECT_BY_ID_SPFalseTTHD, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+ }
 
     @Override
     public List<PhieuDangKi> selectAll() {
@@ -100,6 +110,8 @@ public class PhieuDangKiDAO extends QLKSDAO<PhieuDangKi, String>{
                 entity.setGhiChu(rs.getString("GhiChu"));
                 entity.setGioVao(rs.getString("GioVao"));
                 entity.setGioRa(rs.getString("GioRa"));
+                entity.setTinhTrangCho(rs.getInt("TinhTrangCho"));
+                entity.setTinhTrangHoaDon(rs.getInt("TinhTrangHoaDon"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();

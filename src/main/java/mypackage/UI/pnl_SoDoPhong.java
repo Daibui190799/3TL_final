@@ -122,6 +122,7 @@ public void addToPanelAccMana(List<Phong> listP) {
 
                 Phong epl = listP.get(i);
                 PhieuDangKi pdk2 = pdkdao2.selectebySP(listP.get(i).getSoPhong());
+                PhieuDangKi pdkCTT = pdkdao2.selectebySP_FalseTTHoaDOn(listP.get(i).getSoPhong());
 
                 if (listP.get(i).getTrangthai() == null) {
                     pnlInfo.setBackground(Color.decode("#00CD00"));
@@ -149,10 +150,12 @@ public void addToPanelAccMana(List<Phong> listP) {
                             if (e.getClickCount() == 2 && !e.isConsumed()) {
                                 
                                 //PhieuDangKi pdk2 = pdkdao2.selectebySP(listP.get(index).getSoPhong());
+                                if(pdkCTT.getTinhTrangCho()==0){
                                 frm_ChitietPhong npl = new frm_ChitietPhong();
                                 npl.setVisible(true);
-//                            npl.setForm(epl, pdk2);
-                                frm_ChitietPhong.instance.setForm(epl, pdk2);
+//                               npl.setForm(epl, pdk2);
+                                frm_ChitietPhong.instance.setForm(epl, pdkCTT);
+                                }
                             }
                         }
                     });

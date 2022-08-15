@@ -426,19 +426,21 @@ public class frm_ChitietPhong extends javax.swing.JFrame {
 
     private void btn_ChiTietPhong_ThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChiTietPhong_ThanhToanActionPerformed
         PhieuDangKi pdk = pdkDAO.selectebySP(txt_ChitietPhong_SoPhong.getText());
+      //  System.out.println(pdk.getSoPhong()+ pdk.getTinhTrangHoaDon());
         HoaDon hd = geFormHoaDon(pdk);
         Phong phong = new Phong();
-        try {
-                hdDAO.insert(hd);
-                MsgBox.alert(this, "Thanh Toán Thành Công!");
+      try {
+               hdDAO.insert(hd);
+               MsgBox.alert(this, "Thanh Toán Thành Công!");
                 phong = phdao1.selectebyID(hd.getSoPhong());
                 phong.setTrangthai(null);
+                pdk.setTinhTrangHoaDon(1);
                 phdao1.update(phong);
                 dispose();
-            } catch (Exception e) {
-                MsgBox.alert(this, "Thanh Toán Thất Bại!!!");
+           } catch (Exception e) {
+               MsgBox.alert(this, "Thanh Toán Thất Bại!!!");
                 e.printStackTrace();
-            }
+           }
         
     }//GEN-LAST:event_btn_ChiTietPhong_ThanhToanActionPerformed
 
