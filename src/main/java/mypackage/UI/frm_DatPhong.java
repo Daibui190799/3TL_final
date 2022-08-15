@@ -671,9 +671,10 @@ KhachHang getFormKhachHang(){
     public static DateFormat hour = new SimpleDateFormat("HH:mm");
     public double tongsogio;
     public double songay;
+    Date datevao = new Date();
+    Date datera = new Date();
     void tinhngay( ) {
-        Date datevao = new Date();
-        Date datera = new Date();
+    
         String a = date.format(txt_frmDatPhong_GioVao.getDate());
         String b = txt_GioVao.getText();
         String a2 = date.format(txt_frmDatPhong_GioRa.getDate());
@@ -850,6 +851,22 @@ KhachHang getFormKhachHang(){
                  MsgBox.alert(this, "kiểm tra lại thời gian đặt phòng ");
                  return false;
              }
+        }
+        if (txt_frmDatPhong_TenKH.getText().equals("") || txt_frmDatPhong_CMND.getText().equals("")
+                || txt_frmDatPhong_SDT.getText().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập đầy đủ thông tin Khách Hàng ");
+            return false;
+
+        } else if (!txt_frmDatPhong_SDT.getText().matches("0[0-9\\s.-]{9,10}")) {
+            MsgBox.alert(this, "Số điện thoại không đúng");
+            return false;
+        } else if (!txt_frmDatPhong_CMND.getText().matches("[0-9]{9,15}")) {
+            MsgBox.alert(this, "CMND không đúng");
+            return false;
+        }
+        if(datera.getTime()>datevao.getTime()){
+            MsgBox.alert(this, "Ngày vào phải nhỏ hơn ngày trả");
+            return false;
         }
         return true;
     }
