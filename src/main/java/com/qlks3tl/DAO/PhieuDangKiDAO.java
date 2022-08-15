@@ -18,9 +18,9 @@ import java.util.logging.Logger;
  * @author Acer
  */
 public class PhieuDangKiDAO extends QLKSDAO<PhieuDangKi, String>{
-    String INSERT_SQL = "INSERT INTO Phieu_DK (SoPhong, SoNgay,CMND ,Ngay_Checkin, Ngay_Checkout, GhiChu, MaNV,GioVao,GioRa) "
-            + "VALUES(?, ?, ?, ?, ?, ?,?,?,?)";
-    String UPDATE_SQL = "UPDATE Phieu_DK SET  SoNgay= ?, Ngay_Checkin =?,Ngay_Checkout =?, GhiChu=?,MaNV=?, GioVao=?, GioRa=? where SoPhong =?  ";
+    String INSERT_SQL = "INSERT INTO Phieu_DK (SoPhong, SoNgay,CMND ,Ngay_Checkin, Ngay_Checkout, GhiChu, MaNV,GioVao,GioRa,TinhTrangCho,TinhTrangHoaDon) "
+            + "VALUES(?, ?, ?, ?, ?, ?,?,?,?,?,?)";
+    String UPDATE_SQL = "UPDATE Phieu_DK SET  SoNgay= ?, Ngay_Checkin =?,Ngay_Checkout =?, GhiChu=?,MaNV=?, GioVao=?, GioRa=?,TinhTrangCho=?,TinhTrangHoaDon=? where SoPhong =?  ";
     String DELETE_SQL = "DELETE FROM Phieu_DK WHERE MaPDK=?";
     String SELECT_ALL_SQL = "SELECT * FROM Phieu_DK";
     String SELECT_BY_ID_SQL = "SELECT * FROM Phieu_DK WHERE MaPDK = ?";
@@ -29,7 +29,7 @@ public class PhieuDangKiDAO extends QLKSDAO<PhieuDangKi, String>{
     public void insert(PhieuDangKi entity) {
           try {
             XJdbc.update(INSERT_SQL, entity.getSoPhong(), entity.getSoNgay(), entity.getTenKH(), entity.getNgayDK(), 
-                    entity.getNgayTra(), entity.getGhiChu(), entity.getMaNV(), entity.getGioVao(),entity.getGioRa());
+                    entity.getNgayTra(), entity.getGhiChu(), entity.getMaNV(), entity.getGioVao(),entity.getGioRa(),entity.getTinhTrangCho(),entity.getTinhTrangHoaDon());
         } catch (SQLException ex) {
             Logger.getLogger(QLKSDAO.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -39,7 +39,7 @@ public class PhieuDangKiDAO extends QLKSDAO<PhieuDangKi, String>{
     public void update(PhieuDangKi entity) {
          try {
            XJdbc.update(UPDATE_SQL,   entity.getSoNgay(), entity.getNgayDK(),
-                    entity.getNgayTra(),entity.getGhiChu(),entity.getMaNV(),entity.getGioVao(),entity.getGioRa(),entity.getSoPhong());
+                    entity.getNgayTra(),entity.getGhiChu(),entity.getMaNV(),entity.getGioVao(),entity.getGioRa(),entity.getTinhTrangCho(),entity.getTinhTrangHoaDon(),entity.getSoPhong());
         } catch (SQLException ex) {
             Logger.getLogger(QLKSDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

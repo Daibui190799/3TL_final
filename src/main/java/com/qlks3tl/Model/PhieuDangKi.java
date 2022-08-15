@@ -18,6 +18,25 @@ public class PhieuDangKi {
     int soNgay;
     String ghiChu;
     String MaNV;
+    int TinhTrangCho,TinhTrangHoaDon;
+
+    public int getTinhTrangCho() {
+        return TinhTrangCho;
+    }
+
+    public void setTinhTrangCho(int TinhTrangCho) {
+        this.TinhTrangCho = TinhTrangCho;
+    }
+
+    public int getTinhTrangHoaDon() {
+        return TinhTrangHoaDon;
+    }
+
+    public void setTinhTrangHoaDon(int TinhTrangHoaDon) {
+        this.TinhTrangHoaDon = TinhTrangHoaDon;
+    }
+
+    
 
     public String getGioVao() {
         return GioVao;

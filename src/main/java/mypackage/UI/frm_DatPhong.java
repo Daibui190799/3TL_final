@@ -4,8 +4,22 @@
  */
 package mypackage.UI;
 
+import com.qlks3tl.DAO.KhachHangDAO;
+import com.qlks3tl.DAO.PhieuDangKiDAO;
+import com.qlks3tl.DAO.PhongDAO;
+import com.qlks3tl.Model.KhachHang;
+import com.qlks3tl.Model.PhieuDangKi;
+import com.qlks3tl.Model.Phong;
 import com.qlks3tl.utils.MsgBox;
 import java.awt.print.PrinterException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +35,7 @@ public class frm_DatPhong extends javax.swing.JFrame {
     public frm_DatPhong() {
         initComponents();
         init();
+        txt_frmDatPhong_SoPhong.setEditable(false);
         
         
         
@@ -55,15 +70,15 @@ public class frm_DatPhong extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel16 = new javax.swing.JLabel();
         txt_frmDatPhong_GioVao = new com.toedter.calendar.JDateChooser();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txt_GioVao = new javax.swing.JTextField();
+        txt_GioRa = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
         txt_frmDatPhong_SDT = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txt_frmDatPhong_CMND = new javax.swing.JTextField();
-        cbo_frmDatPhong_SoPhong = new javax.swing.JComboBox<>();
+        txt_frmDatPhong_SoPhong = new javax.swing.JTextField();
         pnl_InVe = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_indatphong = new javax.swing.JTextArea();
@@ -72,8 +87,9 @@ public class frm_DatPhong extends javax.swing.JFrame {
         btn_DatPhong_GuiMail = new javax.swing.JButton();
         btn_PhieuDK_xacnhan = new javax.swing.JButton();
         btn_Phieudk_huybo = new javax.swing.JButton();
+        btn_CapNhat = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -202,7 +218,7 @@ public class frm_DatPhong extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_frmDatPhong_CMND, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                             .addComponent(txt_frmDatPhong_SDT, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                            .addComponent(cbo_frmDatPhong_SoPhong, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(txt_frmDatPhong_SoPhong, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -222,25 +238,25 @@ public class frm_DatPhong extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbl_frmDatPhong_TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbl_frmDatPhong_TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(txt_frmDatPhong_GioVao, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_GioVao, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(txt_frmDatPhong_GioRa, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_GioRa, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -269,9 +285,9 @@ public class frm_DatPhong extends javax.swing.JFrame {
                                 .addGap(1, 1, 1)
                                 .addComponent(txt_frmDatPhong_CMND, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbo_frmDatPhong_SoPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_frmDatPhong_SoPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(68, 68, 68))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,18 +306,18 @@ public class frm_DatPhong extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txt_frmDatPhong_GioRa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                        .addComponent(jTextField2))
+                        .addComponent(txt_GioRa))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txt_frmDatPhong_GioVao, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_GioVao, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_frmDatPhong_TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         txt_indatphong.setColumns(20);
@@ -359,7 +375,7 @@ public class frm_DatPhong extends javax.swing.JFrame {
         );
         pnl_InVeLayout.setVerticalGroup(
             pnl_InVeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 205, Short.MAX_VALUE)
+            .addGap(0, 215, Short.MAX_VALUE)
             .addGroup(pnl_InVeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnl_InVeLayout.createSequentialGroup()
                     .addContainerGap()
@@ -399,6 +415,17 @@ public class frm_DatPhong extends javax.swing.JFrame {
             }
         });
 
+        btn_CapNhat.setBackground(new java.awt.Color(99, 99, 198));
+        btn_CapNhat.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        btn_CapNhat.setForeground(new java.awt.Color(255, 255, 255));
+        btn_CapNhat.setText("CẬP NHẬT");
+        btn_CapNhat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        btn_CapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CapNhatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -408,6 +435,8 @@ public class frm_DatPhong extends javax.swing.JFrame {
             .addComponent(pnl_InVe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_CapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(btn_PhieuDK_xacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_Phieudk_huybo, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -419,10 +448,12 @@ public class frm_DatPhong extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Phieudk_huybo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_PhieuDK_xacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_CapNhat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_Phieudk_huybo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_PhieuDK_xacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_InVe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -476,14 +507,33 @@ public class frm_DatPhong extends javax.swing.JFrame {
     private void btn_PhieuDK_xacnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PhieuDK_xacnhanActionPerformed
         // TODO add your handling code here:
         pnl_InVe.setVisible(true);
-       
-        
+        KhachHang kh = getFormKhachHang();
+        PhieuDangKi pdk = getFormPDK();
+        try {
+            if(khDAO.selectebyID(kh.getCMND())== null){
+                khDAO.insert(kh);
+            }
+            pdkDAO.insert(pdk);
+            MsgBox.alert(this, "Đặt phòng thành công");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Đặt phòng thất bại!!");
+        }
     }//GEN-LAST:event_btn_PhieuDK_xacnhanActionPerformed
 
     private void btn_Phieudk_huyboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Phieudk_huyboActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_btn_Phieudk_huyboActionPerformed
+
+    private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
+        // TODO add your handling code here:
+        tinhngay();
+        if(kiemTra()){
+            System.out.println("mypackage.UI.frm_DatPhong.btn_CapNhatActionPerformed()");
+        } else {
+            System.out.println("sai");
+        }
+    }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -518,15 +568,17 @@ public class frm_DatPhong extends javax.swing.JFrame {
                 new frm_DatPhong().setVisible(true);
             }
         });
+        
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_CapNhat;
     private javax.swing.JButton btn_DatPhong_GuiMail;
     private javax.swing.JButton btn_DatPhong_In;
     private javax.swing.JButton btn_DatPhong_Xem;
     private javax.swing.JButton btn_PhieuDK_xacnhan;
     private javax.swing.JButton btn_Phieudk_huybo;
-    private javax.swing.JComboBox<String> cbo_frmDatPhong_SoPhong;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -543,18 +595,19 @@ public class frm_DatPhong extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lbl_frmDatPhong_GiaGio;
     private javax.swing.JLabel lbl_frmDatPhong_GiaNgay;
     private javax.swing.JLabel lbl_frmDatPhong_SoGioo;
     private javax.swing.JLabel lbl_frmDatPhong_SoNgayo;
     private javax.swing.JLabel lbl_frmDatPhong_TongTien;
     private javax.swing.JPanel pnl_InVe;
+    private javax.swing.JTextField txt_GioRa;
+    private javax.swing.JTextField txt_GioVao;
     private javax.swing.JTextField txt_frmDatPhong_CMND;
     private com.toedter.calendar.JDateChooser txt_frmDatPhong_GioRa;
     private com.toedter.calendar.JDateChooser txt_frmDatPhong_GioVao;
     private javax.swing.JTextField txt_frmDatPhong_SDT;
+    private javax.swing.JTextField txt_frmDatPhong_SoPhong;
     private javax.swing.JTextField txt_frmDatPhong_TenKH;
     private javax.swing.JTextArea txt_indatphong;
     // End of variables declaration//GEN-END:variables
@@ -569,6 +622,9 @@ public class frm_DatPhong extends javax.swing.JFrame {
         
         
     }
+    PhongDAO pDAO = new PhongDAO();
+    PhieuDangKiDAO pdkDAO = new PhieuDangKiDAO();
+    KhachHangDAO khDAO = new KhachHangDAO();
 void inPhieuDatPhong(){
     
     
@@ -584,5 +640,217 @@ void inPhieuDatPhong(){
     
     txt_indatphong.setEditable(false);
 }
+void setForm(Phong p){
+    lbl_frmDatPhong_GiaGio.setText(String.valueOf((pDAO.selectebyID(p.getSoPhong())).getGiaPhong_Gio()));
+    lbl_frmDatPhong_GiaNgay.setText(String.valueOf((pDAO.selectebyID(p.getSoPhong())).getGiaPhong_Ngay()));
+    txt_frmDatPhong_SoPhong.setText(String.valueOf(p.getSoPhong()));
+}
+PhieuDangKi getFormPDK(){
+    int songay1 =(int) (songay*24 + tongsogio) ;
+    PhieuDangKi pdk = new PhieuDangKi();
+    pdk.setTenKH(txt_frmDatPhong_CMND.getText());
+    pdk.setSoPhong(txt_frmDatPhong_SoPhong.getText());
+    pdk.setNgayDK(txt_frmDatPhong_GioVao.getDate());
+    pdk.setNgayTra(txt_frmDatPhong_GioRa.getDate());
+    pdk.setGioVao(txt_GioVao.getText());
+    pdk.setGioRa(txt_GioRa.getText());
+    pdk.setSoNgay(songay1);
+    pdk.setTinhTrangCho(1);
+    return pdk;
+}
+KhachHang getFormKhachHang(){
+    KhachHang kh =new KhachHang();
+    kh.setCMND(txt_frmDatPhong_CMND.getText());
+    kh.setTenKH(txt_frmDatPhong_TenKH.getText());
+    kh.setSDT(txt_frmDatPhong_SDT.getText());
+    return kh;
+}
+    public static DateFormat dateAHour = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    public static DateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+    public static DateFormat hour = new SimpleDateFormat("HH:mm");
+    public double tongsogio;
+    public double songay;
+    void tinhngay( ) {
+        Date datevao = new Date();
+        Date datera = new Date();
+        String a = date.format(txt_frmDatPhong_GioVao.getDate());
+        String b = txt_GioVao.getText();
+        String a2 = date.format(txt_frmDatPhong_GioRa.getDate());
+        String b2 = txt_GioRa.getText();
+        System.out.println(a+" "+b);
+           try {            
+               datevao = dateAHour.parse(a+" "+b);
+               datera = dateAHour.parse(a2+" "+b2);
+           } catch (ParseException ex) {
+               System.out.println("mypackage.UI.frm_ChitietPhong.tinhngay()");
+           }
+           double t1 = (datera.getTime()-datevao.getTime())%(24*60*60*1000);
+           tongsogio = Math.ceil(t1/(60*60*1000));
+           songay = (datera.getTime()-datevao.getTime())/(24*60*60*1000);
+           System.out.println(tongsogio);
+           System.out.println(songay);
+        lbl_frmDatPhong_SoNgayo.setText(String.valueOf(songay)+" Ngày");
+        lbl_frmDatPhong_SoGioo.setText(String.valueOf(tongsogio)+" Giờ");
+        //boolean aaa = ((datevao.getTime()) - (datera.getTime()))>0;
+    }
+    
+    boolean kiemTra(){
+        List<PhieuDangKi> list = new List<PhieuDangKi>() {
+            @Override
+            public int size() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean isEmpty() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public Iterator<PhieuDangKi> iterator() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public Object[] toArray() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public <T> T[] toArray(T[] a) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean add(PhieuDangKi e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean addAll(Collection<? extends PhieuDangKi> c) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean addAll(int index, Collection<? extends PhieuDangKi> c) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void clear() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public PhieuDangKi get(int index) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public PhieuDangKi set(int index, PhieuDangKi element) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void add(int index, PhieuDangKi element) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public PhieuDangKi remove(int index) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public int indexOf(Object o) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public int lastIndexOf(Object o) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public ListIterator<PhieuDangKi> listIterator() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public ListIterator<PhieuDangKi> listIterator(int index) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public List<PhieuDangKi> subList(int fromIndex, int toIndex) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
+        list =pdkDAO.selectbySql("SELECT * FROM Phieu_DK WHERE SoPhong = ?", txt_frmDatPhong_SoPhong.getText()); 
+        Date datevaoNow = new Date();
+        Date dateraNow = new Date();
+        String ngayVao = date.format(txt_frmDatPhong_GioVao.getDate());
+        String GioVao = txt_GioVao.getText();
+        String ngayRa = date.format(txt_frmDatPhong_GioRa.getDate());
+        String gioRa = txt_GioRa.getText();
+        try {            
+               datevaoNow = dateAHour.parse(ngayVao+" "+GioVao);
+               dateraNow = dateAHour.parse(ngayRa+" "+gioRa);
+           } catch (ParseException ex) {
+               System.out.println("mypackage.UI.frm_ChitietPhong.tinhngay()");
+           }
+        for (PhieuDangKi phieuDangKi : list) {
+            System.out.println(phieuDangKi);
+            Date datevao = new Date();
+            Date datera = new Date();
+            String a = date.format(phieuDangKi.getNgayDK());
+            String b = phieuDangKi.getGioRa();
+            String a2 = date.format(phieuDangKi.getNgayTra());
+            String b2 = phieuDangKi.getGioRa();
+            System.out.println("aaaaaaaaaaaaa");
+                try {            
+                    datevao = dateAHour.parse(a+" "+b);
+                    System.out.println(datevao);
+                    datera = dateAHour.parse(a2+" "+b2);
+                    System.out.println(datera);
+                } catch (ParseException ex) {
+                    System.out.println("mypackage.UI.frm_ChitietPhong.tinhngay()");
+                }
+        //boolean aaa = ((datevao.getTime()) - (datera.getTime()))>0;
+             if(!(datevaoNow.getTime() < datevao.getTime() || datevaoNow.getTime() > datera.getTime())){
+                 MsgBox.alert(this, "kiểm tra lại thời gian đặt phòng ");
+                 return false;
+             }if(!(dateraNow.getTime() < datevao.getTime() || dateraNow.getTime() > datera.getTime())){
+                 MsgBox.alert(this, "kiểm tra lại thời gian đặt phòng ");
+                 return false;
+             }
+        }
+        return true;
+    }
 
 }

@@ -66,6 +66,7 @@ public class frm_PhieuDangKy extends javax.swing.JFrame {
         txt_Phieudk_LoaiPhong = new javax.swing.JTextField();
         txt_GioTra = new javax.swing.JTextField();
         txt_GioDK = new javax.swing.JTextField();
+        btn_PhieuDK_DatPhong = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -148,6 +149,17 @@ public class frm_PhieuDangKy extends javax.swing.JFrame {
 
         txt_Phieudk_LoaiPhong.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        btn_PhieuDK_DatPhong.setBackground(new java.awt.Color(99, 99, 198));
+        btn_PhieuDK_DatPhong.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        btn_PhieuDK_DatPhong.setForeground(new java.awt.Color(255, 255, 255));
+        btn_PhieuDK_DatPhong.setText("ĐẶT PHÒNG");
+        btn_PhieuDK_DatPhong.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        btn_PhieuDK_DatPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_PhieuDK_DatPhongActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -155,9 +167,11 @@ public class frm_PhieuDangKy extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(311, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_PhieuDK_DatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btn_PhieuDK_xacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addGap(31, 31, 31)
                         .addComponent(btn_Phieudk_huybo, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -179,7 +193,7 @@ public class frm_PhieuDangKy extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_GioDK, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
                             .addComponent(txt_GioTra))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 123, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -214,7 +228,8 @@ public class frm_PhieuDangKy extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_PhieuDK_xacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Phieudk_huybo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_Phieudk_huybo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_PhieuDK_DatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -248,6 +263,15 @@ public class frm_PhieuDangKy extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_btn_Phieudk_huyboActionPerformed
+
+    private void btn_PhieuDK_DatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PhieuDK_DatPhongActionPerformed
+         frm_DatPhong npl = new frm_DatPhong();
+         Phong p = new Phong();
+         p = phdao1.selectebyID(txt_Phieudk_SoPhong.getText());
+         npl.setVisible(true);
+         npl.setForm(p);
+         dispose();
+    }//GEN-LAST:event_btn_PhieuDK_DatPhongActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,6 +309,7 @@ public class frm_PhieuDangKy extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_PhieuDK_DatPhong;
     private javax.swing.JButton btn_PhieuDK_xacnhan;
     private javax.swing.JButton btn_Phieudk_huybo;
     private javax.swing.JComboBox<String> cbb_Phieudk_TenKH;

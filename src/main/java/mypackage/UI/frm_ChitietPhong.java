@@ -81,6 +81,7 @@ public class frm_ChitietPhong extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         lbl_ChiTietPhong_GiaNgay = new javax.swing.JLabel();
         lbl_ChiTietPhong_GiaGio = new javax.swing.JLabel();
+        btn_DatPhong = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -166,7 +167,7 @@ public class frm_ChitietPhong extends javax.swing.JFrame {
                                     .addComponent(txt_ChitietPhong_giovao, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txt_GioDK, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                                .addComponent(txt_GioDK)
                                 .addComponent(txt_GioTra))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,6 +351,17 @@ public class frm_ChitietPhong extends javax.swing.JFrame {
                 .addGap(48, 48, 48))
         );
 
+        btn_DatPhong.setBackground(new java.awt.Color(99, 99, 198));
+        btn_DatPhong.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        btn_DatPhong.setForeground(new java.awt.Color(255, 255, 255));
+        btn_DatPhong.setText("ĐẶT PHÒNG");
+        btn_DatPhong.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        btn_DatPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DatPhongActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -369,9 +381,11 @@ public class frm_ChitietPhong extends javax.swing.JFrame {
                     .addComponent(jSeparator1))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 343, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btn_DatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
                         .addComponent(btn_ChiTietPhong_ThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_ChiTietPhong_HuyBo, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -398,7 +412,8 @@ public class frm_ChitietPhong extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_ChiTietPhong_HuyBo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_ChiTietPhong_ThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btn_ChiTietPhong_ThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_DatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -435,6 +450,15 @@ public class frm_ChitietPhong extends javax.swing.JFrame {
     private void txt_ChitietPhong_CMNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ChitietPhong_CMNDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_ChitietPhong_CMNDActionPerformed
+
+    private void btn_DatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DatPhongActionPerformed
+        frm_DatPhong npl = new frm_DatPhong();
+        Phong p = new Phong();
+        p = phdao1.selectebyID(txt_ChitietPhong_SoPhong.getText());
+        npl.setVisible(true);
+        npl.setForm(p);
+        dispose();
+    }//GEN-LAST:event_btn_DatPhongActionPerformed
 
     /**
      * @param args the command line arguments
@@ -475,6 +499,7 @@ public class frm_ChitietPhong extends javax.swing.JFrame {
     private javax.swing.JButton btn_ChiTietPhong_CapNhat;
     private javax.swing.JButton btn_ChiTietPhong_HuyBo;
     private javax.swing.JButton btn_ChiTietPhong_ThanhToan;
+    private javax.swing.JButton btn_DatPhong;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
