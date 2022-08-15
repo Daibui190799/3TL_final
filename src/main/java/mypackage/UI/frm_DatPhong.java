@@ -514,6 +514,7 @@ public class frm_DatPhong extends javax.swing.JFrame {
                 khDAO.insert(kh);
             }
             pdkDAO.insert(pdk);
+            System.out.println(pdk.getMaPDK());
             MsgBox.alert(this, "Đặt phòng thành công");
         } catch (Exception e) {
             MsgBox.alert(this, "Đặt phòng thất bại!!");
@@ -630,13 +631,13 @@ void inPhieuDatPhong(){
     
     txt_indatphong.append("\t PHIEU DAT PHONG KHACH SAN 3TL \n\n");
     
-    txt_indatphong.append("MaPhieuDangKy: "+" 22   " +"\n");
-    txt_indatphong.append("Ten Khach Hang: "+" Nguyen Van Test \n");
+    txt_indatphong.append("MaPhieuDangKy: "+  pdkDAO.selectebySP(txt_frmDatPhong_SoPhong.getText()).getMaPDK() +"\n");
+    txt_indatphong.append("Ten Khach Hang: "+txt_frmDatPhong_TenKH.getText()+"  \n");
     
-    txt_indatphong.append("So Dien Thoai: "+ "0900000009 \n");
-    txt_indatphong.append("So Phong: "+ "209 \n");
-    txt_indatphong.append("Ngay bat dau : "+ "2022-09-09 \n");
-    txt_indatphong.append("Ngay ket thuc : "+ "2022-09-10 \n");
+    txt_indatphong.append("So Dien Thoai: "+txt_frmDatPhong_SDT.getText() +" \n");
+    txt_indatphong.append("So Phong: "+txt_frmDatPhong_SoPhong.getText() +" \n");
+    txt_indatphong.append("Ngay bat dau : "+ txt_GioVao.getText()+" Giờ  "+ date.format(txt_frmDatPhong_GioVao.getDate()) +" \n");
+    txt_indatphong.append("Ngay ket thuc : "+ txt_GioRa.getText()+" Giờ  "+ date.format(txt_frmDatPhong_GioRa.getDate()) + "\n");
     
     txt_indatphong.setEditable(false);
 }
