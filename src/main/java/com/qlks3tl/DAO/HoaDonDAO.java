@@ -135,4 +135,43 @@ public class HoaDonDAO extends QLKSDAO<HoaDon, String>{
             throw new RuntimeException(ex);
         }
     }
+    
+    
+    public List<Object[]>getMaKHvaDaThanhtoan(String CMND){
+        List<Object[]> list = new ArrayList<>();
+        try {
+            ResultSet rs = null;
+            try {
+                String sql = "{call sp_showkhachhangvaphongdadat (?)}";
+                rs = XJdbc.query(sql, CMND);
+                while (rs.next()) {
+                    Object[] model = {
+                        rs.getString("TenKH"),
+                        rs.getString("CMND"),
+                        rs.getString("SDT"),
+                        rs.getString("MaLoaiPhong"),
+                        rs.getString("SoPhong"),
+                        rs.getDouble("TongTien"),
+                        rs.getDate("Ngay_Checkin"),
+                        rs.getDate("Ngay_Checkout"),
+                        rs.getInt("SoNgay"),
+                        
+                            
+                       
+                    };
+                    list.add(model);
+                }
+            } finally {
+                rs.getStatement().getConnection().close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return list;
+        }
+ 
+ 
+    
+    
 }

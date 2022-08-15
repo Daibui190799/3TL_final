@@ -619,6 +619,8 @@ public class frm_DatPhong extends javax.swing.JFrame {
         btn_DatPhong_GuiMail.setEnabled(false);
         btn_DatPhong_Xem.setEnabled(true);
         pnl_InVe.setVisible(false);
+        
+        setLocationRelativeTo(null);
         /// 
         
         

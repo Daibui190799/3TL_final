@@ -532,6 +532,7 @@ public class frm_ChitietPhong extends javax.swing.JFrame {
 void init() {
         this.setLocationRelativeTo(null);
         //  jPanel3.setVisible(false);
+        setlocktypedata();
 
     }
 

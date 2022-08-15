@@ -118,6 +118,7 @@ public void addToPanelAccMana(List<Phong> listP) {
                 JLabel loaiPhong = new JLabel("Loại Phòng: " + listP.get(i).getMaLoaiPhong());
 
                 JLabel trangThai = new JLabel("Trạng thái: " + listP.get(i).getTrangthai());
+                JLabel DatPhong = new JLabel();
 
                 Phong epl = listP.get(i);
                 PhieuDangKi pdk2 = pdkdao2.selectebySP(listP.get(i).getSoPhong());

@@ -72,7 +72,7 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btn_MHN_HoaDon = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btn_MHN_ThongKe1 = new javax.swing.JButton();
         MainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -323,12 +323,38 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel4MouseEntered(evt);
+            }
         });
 
-        jButton1.setText("Hình ảnh");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_MHN_ThongKe1.setBackground(new java.awt.Color(150, 196, 200));
+        btn_MHN_ThongKe1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btn_MHN_ThongKe1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/HinhAnh/Icon_Cong.png"))); // NOI18N
+        btn_MHN_ThongKe1.setText("Checkin Phòng");
+        btn_MHN_ThongKe1.setContentAreaFilled(false);
+        btn_MHN_ThongKe1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_MHN_ThongKe1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn_MHN_ThongKe1.setOpaque(true);
+        btn_MHN_ThongKe1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btn_MHN_ThongKe1MouseMoved(evt);
+            }
+        });
+        btn_MHN_ThongKe1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_MHN_ThongKe1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_MHN_ThongKe1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_MHN_ThongKe1MouseExited(evt);
+            }
+        });
+        btn_MHN_ThongKe1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_MHN_ThongKe1ActionPerformed(evt);
             }
         });
 
@@ -345,12 +371,13 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(btn_MHN_HoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1))
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                        .addComponent(btn_MHN_ThongKe1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,11 +395,11 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
                 .addComponent(btn_MHN_HoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_MHN_ThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
+                .addGap(1, 1, 1)
+                .addComponent(btn_MHN_ThongKe1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
 
         MainPanel.setBackground(new java.awt.Color(150, 196, 200));
@@ -591,11 +618,6 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
         MainPanel.validate();
     }//GEN-LAST:event_btn_MHN_HoaDonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
         // TODO add your handling code here:
@@ -635,15 +657,15 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
            Phong phong= new Phong();
            PhongDAO phdao= new PhongDAO();
            
-            frm_ChitietPhong ctp = new frm_ChitietPhong();
-            ctp.setVisible(true);
+            frm_XacNhanDangKyPhong xacnhandkp = new frm_XacNhanDangKyPhong();
+           xacnhandkp.setVisible(true);
             pdk = pdkdao.selectbyMAPDK(mapdk3);
             
             
             System.out.println(pdk);
             
             
-            ctp.setForm(phdao.selectebyID(pdk.getSoPhong()),pdk);
+            xacnhandkp.setForm(phdao.selectebyID(pdk.getSoPhong()),pdk);
             
             
             // select string  , mapdk int
@@ -670,6 +692,32 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
             System.err.println(e.getMessage());
         }
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
+        // TODO add your handling code here:
+        jLabel4.setBackground(Color.decode("#6363C6"));
+        jLabel4.setBorder(BorderFactory.createLineBorder(new Color(150, 196, 200), 3));
+    }//GEN-LAST:event_jLabel4MouseEntered
+
+    private void btn_MHN_ThongKe1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_MHN_ThongKe1MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_MHN_ThongKe1MouseMoved
+
+    private void btn_MHN_ThongKe1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_MHN_ThongKe1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_MHN_ThongKe1MouseClicked
+
+    private void btn_MHN_ThongKe1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_MHN_ThongKe1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_MHN_ThongKe1MouseEntered
+
+    private void btn_MHN_ThongKe1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_MHN_ThongKe1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_MHN_ThongKe1MouseExited
+
+    private void btn_MHN_ThongKe1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MHN_ThongKe1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_MHN_ThongKe1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -714,7 +762,7 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
     private javax.swing.JButton btn_MHN_NhanVien;
     private javax.swing.JButton btn_MHN_SoDoPhong;
     private javax.swing.JButton btn_MHN_ThongKe;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_MHN_ThongKe1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -756,6 +804,7 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
         btn_MHN_NhanVien.setBackground(new Color(150, 196, 200));
         btn_MHN_ThongKe.setBackground(new Color(150, 196, 200));
         btn_MHN_HoaDon.setBackground(new Color(150, 196, 200));
+        jLabel4.setBackground(new Color(150, 196, 200));
         this.btn_CheckClickMenu.setBackground(Color.decode("#6363C6"));
 
         // set color border

@@ -115,5 +115,7 @@ public class KhachHangDAO extends QLKSDAO<KhachHang, String>{
        }
        
    }
-   
+ 
+ 
+ 
 }

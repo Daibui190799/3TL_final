@@ -4,8 +4,10 @@
  */
 package mypackage.UI;
 
+import com.qlks3tl.DAO.HoaDonDAO;
 import com.qlks3tl.Model.KhachHang;
 import com.qlks3tl.DAO.KhachHangDAO;
+import com.qlks3tl.Model.HoaDon;
 import com.qlks3tl.utils.Auth;
 import com.qlks3tl.utils.MsgBox;
 import java.awt.Color;
@@ -14,6 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import java.util.Date;
 
 /**
  *
@@ -23,7 +26,7 @@ public class pnl_KhachHang extends javax.swing.JPanel {
 
     public pnl_KhachHang() {
         initComponents();
-      //  setOpaque(false);
+        //  setOpaque(false);
         init();
     }
 
@@ -56,6 +59,8 @@ public class pnl_KhachHang extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_KhachHang_KhachHang = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbl_KhackHang_show = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(150, 196, 200));
         setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 1, 1, new java.awt.Color(168, 222, 247)));
@@ -216,7 +221,7 @@ public class pnl_KhachHang extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Khachhang_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Khachhang_new, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(150, 196, 200));
@@ -296,8 +301,30 @@ public class pnl_KhachHang extends javax.swing.JPanel {
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        tbl_KhackHang_show.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(168, 222, 247), 3));
+        tbl_KhackHang_show.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tbl_KhackHang_show.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Tên Khách Hàng", "CMND", "SĐT", "Loại Phòng", "Số Phòng", "Tổng tiền", "Ngày Checkin", "Ngày Checkout", "Tổng số Giờ"
+            }
+        ));
+        tbl_KhackHang_show.setGridColor(new java.awt.Color(150, 196, 200));
+        tbl_KhackHang_show.setRowHeight(27);
+        tbl_KhackHang_show.setRowMargin(3);
+        tbl_KhackHang_show.setSelectionBackground(new java.awt.Color(150, 196, 200));
+        jScrollPane2.setViewportView(tbl_KhackHang_show);
+        if (tbl_KhackHang_show.getColumnModel().getColumnCount() > 0) {
+            tbl_KhackHang_show.getColumnModel().getColumn(0).setMinWidth(10);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -310,18 +337,22 @@ public class pnl_KhachHang extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -346,7 +377,7 @@ public class pnl_KhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_Khachhang_xoaActionPerformed
 
     private void btn_Khachhang_xoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Khachhang_xoa1ActionPerformed
-      //  clearForm();
+        //  clearForm();
     }//GEN-LAST:event_btn_Khachhang_xoa1ActionPerformed
 
     private void tbl_KhachHang_KhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_KhachHang_KhachHangMouseClicked
@@ -355,11 +386,13 @@ public class pnl_KhachHang extends javax.swing.JPanel {
             this.row = tbl_KhachHang_KhachHang.getSelectedRow();
             this.edit();
             FillTalbleToForm();
+            filltablekhachhang_lichsu();
+
         }
     }//GEN-LAST:event_tbl_KhachHang_KhachHangMouseClicked
 
     private void btn_Khachhang_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Khachhang_newActionPerformed
-       
+
         clearForm();// TODO add your handling code here:
     }//GEN-LAST:event_btn_Khachhang_newActionPerformed
 
@@ -384,7 +417,9 @@ public class pnl_KhachHang extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tbl_KhachHang_KhachHang;
+    private javax.swing.JTable tbl_KhackHang_show;
     private javax.swing.JTextField txt_KhachHang_CMND;
     private com.toedter.calendar.JDateChooser txt_KhachHang_DOB;
     private javax.swing.JTextField txt_KhachHang_SDT;
@@ -392,14 +427,14 @@ public class pnl_KhachHang extends javax.swing.JPanel {
     private javax.swing.JTextField txt_KhachHang_TimKiem;
     // End of variables declaration//GEN-END:variables
 
-     void init() {
+    void init() {
         initComponents();
         this.fillTable();
         this.updateStatus();
         designTable();
-        
+
     }
-    KhachHangDAO dao = new KhachHangDAO();
+    KhachHangDAO khdao = new KhachHangDAO();
     int row = -1;
 
     void fillTable() {
@@ -407,7 +442,7 @@ public class pnl_KhachHang extends javax.swing.JPanel {
         model.setRowCount(0);
 // xóa tất cả các hàng trên table 
         try {
-            List<KhachHang> list = dao.selectAll(); // Lấy tất cả dữ liệu từ SQL 
+            List<KhachHang> list = khdao.selectAll(); // Lấy tất cả dữ liệu từ SQL 
             for (KhachHang kh : list) {
                 Object[] row = {
                     // theo thu tu Database
@@ -447,11 +482,11 @@ public class pnl_KhachHang extends javax.swing.JPanel {
     void edit() {
         if (row != -1) {
             String CMND = (String) tbl_KhachHang_KhachHang.getValueAt(this.row, 2);
-            
-            
+
             tbl_KhachHang_KhachHang.setRowSelectionInterval(row, row);
-            KhachHang kh = dao.selectebyID(CMND);
+            KhachHang kh = khdao.selectebyID(CMND);
             this.setForm(kh);
+           
             this.updateStatus();
         }
 
@@ -462,7 +497,7 @@ public class pnl_KhachHang extends javax.swing.JPanel {
             KhachHang kh = getForm();
 
             try {
-                dao.update(kh);
+                khdao.update(kh);
                 this.fillTable();
                 this.clearForm();
                 MsgBox.alert(this, "Cập nhật thành công!");
@@ -479,7 +514,7 @@ public class pnl_KhachHang extends javax.swing.JPanel {
             String CMND = txt_KhachHang_CMND.getText();
             if (MsgBox.confirm(this, "Bạn thực sự muốn xóa Khách Hàng này")) {
                 try {
-                    dao.delete(CMND);
+                    khdao.delete(CMND);
                     this.fillTable();
                     this.clearForm();
                     MsgBox.alert(this, "Xóa thành công");
@@ -501,7 +536,7 @@ public class pnl_KhachHang extends javax.swing.JPanel {
         btn_Khachhang_them.setEnabled(!edit);
         btn_Khachhang_sua.setEnabled(edit);
         btn_Khachhang_xoa.setEnabled(edit);
-       
+
     }
 
     void insert() {
@@ -509,7 +544,7 @@ public class pnl_KhachHang extends javax.swing.JPanel {
             KhachHang kh = getForm();
 
             try {
-                dao.insert(kh);
+                khdao.insert(kh);
                 this.fillTable();
                 this.clearForm();
                 MsgBox.alert(this, "Thêm mới thành công!");
@@ -523,9 +558,9 @@ public class pnl_KhachHang extends javax.swing.JPanel {
         KhachHang kh = this.getForm();
         Calendar instance = Calendar.getInstance();
         int yearNow = instance.get(Calendar.YEAR);
-        Date dateNow=java.util.Calendar.getInstance().getTime();
-        Date date = txt_KhachHang_DOB.getDate();       
-        double year = ((dateNow.getTime() - date.getTime())/(24*60*60*1000))/365;
+        Date dateNow = java.util.Calendar.getInstance().getTime();
+        Date date = txt_KhachHang_DOB.getDate();
+        double year = ((dateNow.getTime() - date.getTime()) / (24 * 60 * 60 * 1000)) / 365;
 
         if (kh.getTenKH().equals("") || kh.getCMND().equals("")
                 || kh.getSDT().equals("") || kh.getDOB().equals("")) {
@@ -538,7 +573,7 @@ public class pnl_KhachHang extends javax.swing.JPanel {
         } else if (!kh.getCMND().matches("[0-9]{9,15}")) {
             MsgBox.alert(this, "CMND không đúng");
             return false;
-        } else if (year < 18){
+        } else if (year < 18) {
             MsgBox.alert(this, "Khách hàng chưa đủ 18 tuổi, vui lòng kiểm tra lại!!");
             return false;
 
@@ -547,33 +582,79 @@ public class pnl_KhachHang extends javax.swing.JPanel {
     }
 
     void FillTalbleToForm() {
-        List<KhachHang> list = dao.selectAll();
+        List<KhachHang> list = khdao.selectAll();
         setForm(list.get(row));
+
     }
-    
-    
+
     // tim kiem theo CMND
-     private void timKiem() {
+    private void timKiem() {
         DefaultTableModel model = (DefaultTableModel) tbl_KhachHang_KhachHang.getModel();
         model.setRowCount(0);
-       
+
         String keyword = txt_KhachHang_TimKiem.getText();
-        List<KhachHang> list = dao.search(keyword);
+        List<KhachHang> list = khdao.search(keyword);
         for (KhachHang nt : list) {
             model.addRow(new Object[]{
-                
-                nt.getTenKH(),           
-               
-                nt.getSDT(), 
+                nt.getTenKH(),
+                nt.getSDT(),
                 nt.getCMND(),
                 nt.getDOB()
             });
         }
     }
-      void designTable() {        
+
+    void designTable() {
         tbl_KhachHang_KhachHang.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 18));
         tbl_KhachHang_KhachHang.getTableHeader().setForeground(Color.BLACK);
-       
-      
+
     }
+    HoaDonDAO hddao = new HoaDonDAO();
+
+    void filltablekhachhang_lichsu() {
+        
+        DefaultTableModel model = (DefaultTableModel) tbl_KhackHang_show.getModel();
+        model.setRowCount(0);
+        try {
+
+            String cmnd = txt_KhachHang_CMND.getText();
+            System.out.println(cmnd);
+            List<Object[]> list = hddao.getMaKHvaDaThanhtoan(cmnd);
+            try {
+                
+           
+            for (Object[] row : list) {
+                Object[] r = {
+                    row[0], row[1], row[2], row[3], row[4],(double)row[5],(Date) row[6], (Date) row[7],(int)row[8]
+                };
+
+                model.addRow(r);
+
+            }
+             } catch (Exception e) {
+                 e.printStackTrace();
+            }
+           
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+//       DefaultTableModel model = (DefaultTableModel) tbl_KhackHang_show.getModel();
+//        model.setRowCount(0);
+//        String cmnd = (txt_KhachHang_CMND.getText());
+//// xóa tất cả các hàng trên table 
+//        try {
+//            List<KhachHang> list = khdao.selectbySql(cmnd); // Lấy tất cả dữ liệu từ SQL 
+//            for (KhachHang kh : list) {
+//                Object[] row = {
+//                    // theo thu tu Database
+//                    kh.getTenKH(), kh.getSDT(), kh.getCMND(), kh.getDOB()
+//                };
+//                model.addRow(row);
+//            }
+//        } catch (Exception e) {
+//            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+//        }
+     }
+
 }
