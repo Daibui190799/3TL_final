@@ -429,7 +429,8 @@ public class frm_ChitietPhong extends javax.swing.JFrame {
       //  System.out.println(pdk.getSoPhong()+ pdk.getTinhTrangHoaDon());
         HoaDon hd = geFormHoaDon(pdk);
         Phong phong = new Phong();
-      try {
+      if(kiemtra()){
+          try {
                hdDAO.insert(hd);
                MsgBox.alert(this, "Thanh Toán Thành Công!");
                 phong = phdao1.selectebyID(hd.getSoPhong());
@@ -441,12 +442,15 @@ public class frm_ChitietPhong extends javax.swing.JFrame {
                MsgBox.alert(this, "Thanh Toán Thất Bại!!!");
                 e.printStackTrace();
            }
+      }
         
     }//GEN-LAST:event_btn_ChiTietPhong_ThanhToanActionPerformed
 
     private void btn_ChiTietPhong_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChiTietPhong_CapNhatActionPerformed
         // TODO add your handling code here:
-        update();
+        if(kiemtra()){
+            update();
+        }
     }//GEN-LAST:event_btn_ChiTietPhong_CapNhatActionPerformed
 
     private void txt_ChitietPhong_CMNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ChitietPhong_CMNDActionPerformed
@@ -576,7 +580,7 @@ void init() {
 //     
 // }
     //double tongTienDV = txt_ChiTietPhong_SoLuongDV * (dvk.getGia());
-
+    double tongtien;
     void setFormtuPDK(PhieuDangKi pdk2) {
         txt_ChitietPhong_giovao.setDate(pdk2.getNgayDK());
         txt_ChitietPhong_giora.setDate(pdk2.getNgayTra());
@@ -585,13 +589,7 @@ void init() {
         tinhngay(pdk2);
         lbl_ChiTietPhong_Songay.setText(String.valueOf(songay) + " Ngày");
         lbl_ChiTietPhong_SoGio.setText(String.valueOf(tongsogio) + " Giờ");
-        double tongtien;
-        tongtien = (tongsogio) * phdao1.selectebyID(pdk2.getSoPhong()).getGiaPhong_Ngay();
-        if(tongsogio > 4){
-            tongtien = (songay +1) * phdao1.selectebyID(pdk2.getSoPhong()).getGiaPhong_Ngay();
-        } else {
-            tongtien = (tongsogio) * phdao1.selectebyID(pdk2.getSoPhong()).getGiaPhong_Gio() + songay*(phdao1.selectebyID(pdk2.getSoPhong()).getGiaPhong_Ngay());
-        }
+        
         lbl_ChiTietPhong_TongTienPhong.setText(String.valueOf(tongtien) + "00" );
         setlocktypedata();
         
@@ -640,6 +638,12 @@ void init() {
            songay = (datera.getTime()-datevao.getTime())/(24*60*60*1000);
            System.out.println(tongsogio);
            System.out.println(songay);
+           tongtien = (tongsogio) * phdao1.selectebyID(pdk.getSoPhong()).getGiaPhong_Ngay();
+                if(tongsogio > 4){
+                    tongtien = (songay +1) * phdao1.selectebyID(pdk.getSoPhong()).getGiaPhong_Ngay();
+                } else {
+                    tongtien = (tongsogio) * phdao1.selectebyID(pdk.getSoPhong()).getGiaPhong_Gio() + songay*(phdao1.selectebyID(pdk.getSoPhong()).getGiaPhong_Ngay());
+            }
     }
 
     PhieuDangKi getForm() {
@@ -692,7 +696,6 @@ void init() {
 //                pdkDAO.update(pdk);
            
             pdkDAO.update(pdk);
-                    System.out.println("A2"+pdk.getSoNgay());
             setFormtuPDK(pdk);
             MsgBox.alert(this, "Cập nhật thành công!");
             //         System.out.println(pdk.getSoPhong());
@@ -703,5 +706,14 @@ void init() {
             MsgBox.alert(this, "Cập nhật thất bại");
         }
 
+    }
+    boolean kiemtra(){
+        tinhngay(pdkDAO.selectebySP(txt_ChitietPhong_SoPhong.getText()));
+        if(tongtien < 0){
+            MsgBox.alert(this, "Thời gian trả phòng phải lớn hơn thời gian vào ");
+            return false;
+            
+        }
+        return true;
     }
 }
