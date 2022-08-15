@@ -65,7 +65,7 @@ public class frm_XacNhanDangKyPhong extends javax.swing.JFrame {
         btn_XacNhanDatPhong_DongY = new javax.swing.JButton();
         btn_XacNhanDatPhong_huybo = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N

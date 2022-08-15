@@ -102,6 +102,7 @@ public class frm_ChiTietHoaDon extends javax.swing.JFrame {
         txt_inHD = new javax.swing.JTextArea();
         btn_CTHD_XemTruoc = new javax.swing.JButton();
         btn_CTHD_inHD = new javax.swing.JButton();
+        btn_CTHD_sendmail = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -294,6 +295,17 @@ public class frm_ChiTietHoaDon extends javax.swing.JFrame {
             }
         });
 
+        btn_CTHD_sendmail.setBackground(new java.awt.Color(99, 99, 198));
+        btn_CTHD_sendmail.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        btn_CTHD_sendmail.setForeground(new java.awt.Color(255, 255, 255));
+        btn_CTHD_sendmail.setText("GỬI MAIL");
+        btn_CTHD_sendmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        btn_CTHD_sendmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CTHD_sendmailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -307,7 +319,8 @@ public class frm_ChiTietHoaDon extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_CTHD_XemTruoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_CTHD_inHD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btn_CTHD_inHD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_CTHD_sendmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -328,6 +341,8 @@ public class frm_ChiTietHoaDon extends javax.swing.JFrame {
                         .addComponent(btn_CTHD_XemTruoc, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_CTHD_inHD, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_CTHD_sendmail, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -340,10 +355,14 @@ public class frm_ChiTietHoaDon extends javax.swing.JFrame {
         inHD();
         btn_CTHD_XemTruoc.setEnabled(false);
         btn_CTHD_inHD.setEnabled(true);
+        btn_CTHD_sendmail.setEnabled(false);
     }//GEN-LAST:event_btn_CTHD_XemTruocActionPerformed
 
     private void btn_CTHD_inHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CTHD_inHDActionPerformed
         // TODO add your handling code here:
+        btn_CTHD_XemTruoc.setEnabled(false);
+        btn_CTHD_inHD.setEnabled(false);
+        btn_CTHD_sendmail.setEnabled(true);
         try {
             txt_inHD.print();
             MsgBox.alert(this, "In thành công");
@@ -352,6 +371,17 @@ public class frm_ChiTietHoaDon extends javax.swing.JFrame {
             Logger.getLogger(frm_ChiTietHoaDon.class.getName()).log(Level.SEVERE, null,e);
         }
     }//GEN-LAST:event_btn_CTHD_inHDActionPerformed
+
+    private void btn_CTHD_sendmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CTHD_sendmailActionPerformed
+        // TODO add your handling code here:
+         {
+        btn_CTHD_inHD.setEnabled(false);
+        btn_CTHD_sendmail.setEnabled(false);
+        btn_CTHD_XemTruoc.setEnabled(false);
+       GuiMail gui= new GuiMail();
+        gui.setVisible(true);
+        }
+    }//GEN-LAST:event_btn_CTHD_sendmailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -392,6 +422,7 @@ public class frm_ChiTietHoaDon extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_CTHD_XemTruoc;
     private javax.swing.JButton btn_CTHD_inHD;
+    private javax.swing.JButton btn_CTHD_sendmail;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

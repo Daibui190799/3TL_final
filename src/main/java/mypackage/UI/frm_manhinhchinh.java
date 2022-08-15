@@ -717,6 +717,9 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
 
     private void btn_MHN_ThongKe1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MHN_ThongKe1ActionPerformed
         // TODO add your handling code here:
+        CheckinDatTruocbangdulieu ckindattrc = new CheckinDatTruocbangdulieu();
+        ckindattrc.setVisible(true);
+   
     }//GEN-LAST:event_btn_MHN_ThongKe1ActionPerformed
 
     /**
