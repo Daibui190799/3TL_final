@@ -178,6 +178,13 @@ public class frm_DatPhong extends javax.swing.JFrame {
         jLabel16.setText("Giờ Nhận Phòng");
         jLabel16.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 0, 255)));
 
+        txt_GioVao.setText("11:00");
+        txt_GioVao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_GioVaoActionPerformed(evt);
+            }
+        });
+
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(99, 99, 198));
@@ -509,6 +516,7 @@ public class frm_DatPhong extends javax.swing.JFrame {
         pnl_InVe.setVisible(true);
         KhachHang kh = getFormKhachHang();
         PhieuDangKi pdk = getFormPDK();
+        if (kiemTra()){
         try {
             if(khDAO.selectebyID(kh.getCMND())== null){
                 khDAO.insert(kh);
@@ -518,6 +526,7 @@ public class frm_DatPhong extends javax.swing.JFrame {
             MsgBox.alert(this, "Đặt phòng thành công");
         } catch (Exception e) {
             MsgBox.alert(this, "Đặt phòng thất bại!!");
+        }
         }
     }//GEN-LAST:event_btn_PhieuDK_xacnhanActionPerformed
 
@@ -535,6 +544,10 @@ public class frm_DatPhong extends javax.swing.JFrame {
             System.out.println("sai");
         }
     }//GEN-LAST:event_btn_CapNhatActionPerformed
+
+    private void txt_GioVaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_GioVaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_GioVaoActionPerformed
 
     /**
      * @param args the command line arguments

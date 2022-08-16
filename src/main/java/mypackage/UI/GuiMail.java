@@ -56,12 +56,12 @@ String duongdan="";
         btn_Phieudk_huybo = new javax.swing.JButton();
         btn_PhieuDK_xacnhan = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(99, 99, 198));
-        jLabel7.setText("ĐẶT PHÒNG");
+        jLabel7.setText("GỬI MAIL ");
         jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         jPanel1.add(jLabel7);
 
@@ -274,6 +274,7 @@ String duongdan="";
 
             JOptionPane.showMessageDialog(null, "Gửi thành công", "Thông báo",
                     javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         } catch (Exception e) {
             e.printStackTrace();
 //            Logger.getLogger(GuiMail.class.getName()).log(level.SERVE, null)

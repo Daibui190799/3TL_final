@@ -425,7 +425,7 @@ public class frm_ChitietPhong extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ChiTietPhong_HuyBoActionPerformed
 
     private void btn_ChiTietPhong_ThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChiTietPhong_ThanhToanActionPerformed
-        PhieuDangKi pdk = pdkDAO.selectebySP(txt_ChitietPhong_SoPhong.getText());
+        PhieuDangKi pdk = pdkDAO.selectebySP_FalseTTHoaDOn(txt_ChitietPhong_SoPhong.getText());
       //  System.out.println(pdk.getSoPhong()+ pdk.getTinhTrangHoaDon());
         HoaDon hd = geFormHoaDon(pdk);
         Phong phong = new Phong();
@@ -438,7 +438,7 @@ public class frm_ChitietPhong extends javax.swing.JFrame {
                 pdk.setTinhTrangHoaDon(1);
                 
                 phdao1.update(phong);
-                pdkDAO.update(pdk);
+                pdkDAO.updatepdkchothanhtoan(pdk);
                 dispose();
            } catch (Exception e) {
                MsgBox.alert(this, "Thanh Toán Thất Bại!!!");
@@ -560,6 +560,7 @@ void init() {
         txt_GioDK.setText(pdk1.getGioVao());
         txt_GioTra.setText(pdk1.getGioRa());
         txt_ChitietPhong_giora.setDate(pdk1.getNgayTra());
+       
 
         tinhngay(pdk1);
         lbl_ChiTietPhong_Songay.setText(String.valueOf(songay) + " Ngày");
@@ -629,6 +630,7 @@ void init() {
         String a2 = date.format(txt_ChitietPhong_giora.getDate());
         String b2 = txt_GioTra.getText();
         System.out.println(a+" "+b);
+        
            try {            
                datevao = dateAHour.parse(a+" "+b);
                datera = dateAHour.parse(a2+" "+b2);
@@ -650,6 +652,8 @@ void init() {
 
     PhieuDangKi getForm() {
         PhieuDangKi nv = new PhieuDangKi();
+//        System.out.println("dsdsd " + pdkDAO.selectbyMAPDK(nv.getMaPDK()) );
+        
         int songay1 =(int)(songay*24 + tongsogio) ;
         nv.setTenKH(txt_ChitietPhong_TenKH.getText());
         nv.setSoPhong(txt_ChitietPhong_SoPhong.getText());
@@ -659,7 +663,7 @@ void init() {
         nv.setGioRa(txt_GioTra.getText());
         nv.setGioVao(txt_GioDK.getText());
         nv.setSoNgay(songay1);
-
+       
         return nv;
     }
     HoaDon geFormHoaDon(PhieuDangKi pdk){
@@ -684,20 +688,44 @@ void init() {
 
         return hd;
     }
+//     void getFormxx(PhieuDangKi pdk) {
+//        
+//        
+//        System.out.println("dsdsd223 " +pdk.getMaPDK());
+//        
+//        int songay1 =(int)(songay*24 + tongsogio) ;
+//        pdk.setTenKH(txt_ChitietPhong_TenKH.getText());
+//        pdk.setSoPhong(txt_ChitietPhong_SoPhong.getText());
+//        pdk.setLoaiPhong(txt_ChitietPhong_LoaiPhong.getText());
+//        pdk.setNgayDK(txt_ChitietPhong_giovao.getDate());
+//        pdk.setNgayTra(txt_ChitietPhong_giora.getDate());
+//        pdk.setGioRa(txt_GioTra.getText());
+//        pdk.setGioVao(txt_GioDK.getText());
+//        pdk.setSoNgay(songay1);
+//
+//        
+//    }
     void update() {
         
-        PhieuDangKi pdk = getForm();
+         PhieuDangKi pdk = getForm();
+//        System.out.println("mã pdk"+ pdk.getMaPDK());
+//         System.out.println("mã pdk lúc get form " + pdkDAO.selectbyMAPDK(pdk.getMaPDK()) );
+//        pdkDAO.selectebyID(pdk.getMaPDK()+"");
          tinhngay(pdk);
-        System.out.println("AA"+pdk.getSoNgay());
-        //   System.out.println(pdk.getSoPhong());
-        //    System.out.println(pdk.getMaPDK());
-
-        try {
+  //      System.out.println("AA"+pdk.getSoNgay());
+       
+         //  System.out.println(pdk.getSoPhong());
+       //     System.out.println(pdk.getMaPDK());
+       
+       try {
 
 //                pdk = pdkDAO.selectebyID(pdk.getSoPhong());
 //                pdkDAO.update(pdk);
+          
+            pdkDAO.update22(pdk);
+            
            
-            pdkDAO.update(pdk);
+            System.out.println(pdk.getMaPDK()+ " ma pdk lúc đã update ?");
             setFormtuPDK(pdk);
             MsgBox.alert(this, "Cập nhật thành công!");
             //         System.out.println(pdk.getSoPhong());
@@ -709,8 +737,9 @@ void init() {
         }
 
     }
+
     boolean kiemtra(){
-        tinhngay(pdkDAO.selectebySP(txt_ChitietPhong_SoPhong.getText()));
+        tinhngay(pdkDAO.selectebySP_FalseTTHoaDOn(txt_ChitietPhong_SoPhong.getText()));
         if(tongtien < 0){
             MsgBox.alert(this, "Thời gian trả phòng phải lớn hơn thời gian vào ");
             return false;

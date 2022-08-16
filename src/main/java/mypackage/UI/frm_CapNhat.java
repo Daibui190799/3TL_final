@@ -9,7 +9,10 @@ import com.qlks3tl.DAO.PhongDAO;
 import com.qlks3tl.Model.HoaDon;
 import com.qlks3tl.Model.PhieuDangKi;
 import com.qlks3tl.Model.Phong;
+import com.qlks3tl.utils.Auth;
 import com.qlks3tl.utils.MsgBox;
+import java.awt.Color;
+import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -33,9 +36,21 @@ public class frm_CapNhat extends javax.swing.JFrame {
     }
     public void init(){
         this.updateStatus();
+        designTable();
+       if (!Auth.isManager()) {
+            
+            btn_CNGP_capnhat.setEnabled(false);
+        } else{
+           btn_CNGP_capnhat.setEnabled(true);
+           
+       }
        // this.fillTable();
 
     }
+     void designTable() {
+        tbl_CNGP_DsdatPhong.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 18));
+        tbl_CNGP_DsdatPhong.getTableHeader().setForeground(Color.BLACK);
+     }
    
     PhongDAO dao = new PhongDAO();
     PhieuDangKiDAO daopdk = new  PhieuDangKiDAO();
@@ -380,6 +395,7 @@ public class frm_CapNhat extends javax.swing.JFrame {
             }
         });
 
+        tbl_CNGP_DsdatPhong.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(168, 222, 247), 4, true));
         tbl_CNGP_DsdatPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -391,6 +407,10 @@ public class frm_CapNhat extends javax.swing.JFrame {
                 "Mã PDK", "Số Phòng", "CMND", "Ngày vào", "Ngày ra", "Giờ vào", "Giờ ra", "Trạng Thái", "Tình Trạng Chờ"
             }
         ));
+        tbl_CNGP_DsdatPhong.setGridColor(new java.awt.Color(150, 196, 200));
+        tbl_CNGP_DsdatPhong.setRowHeight(27);
+        tbl_CNGP_DsdatPhong.setRowMargin(3);
+        tbl_CNGP_DsdatPhong.setSelectionBackground(new java.awt.Color(150, 196, 200));
         tbl_CNGP_DsdatPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_CNGP_DsdatPhongMouseClicked(evt);
@@ -453,6 +473,7 @@ public class frm_CapNhat extends javax.swing.JFrame {
 
     private void btn_CNGP_capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CNGP_capnhatActionPerformed
         // TODO add your handling code here:
+        
         update();
     }//GEN-LAST:event_btn_CNGP_capnhatActionPerformed
 

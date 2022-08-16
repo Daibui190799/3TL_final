@@ -607,6 +607,9 @@ public class pnl_KhachHang extends javax.swing.JPanel {
     void designTable() {
         tbl_KhachHang_KhachHang.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 18));
         tbl_KhachHang_KhachHang.getTableHeader().setForeground(Color.BLACK);
+        
+        tbl_KhackHang_show.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 18));
+        tbl_KhackHang_show.getTableHeader().setForeground(Color.BLACK);
 
     }
     HoaDonDAO hddao = new HoaDonDAO();

@@ -8,6 +8,8 @@ import com.qlks3tl.DAO.PhieuDangKiDAO;
 import com.qlks3tl.DAO.PhongDAO;
 import com.qlks3tl.Model.PhieuDangKi;
 import com.qlks3tl.Model.Phong;
+import com.qlks3tl.utils.Auth;
+import com.qlks3tl.utils.MsgBox;
 import com.qlks3tl.utils.getinfo;
 import java.awt.Color;
 import java.awt.Font;
@@ -481,6 +483,9 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_MHN_NhanVienMouseClicked
 
     private void btn_MHN_NhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MHN_NhanVienActionPerformed
+        if (!Auth.isManager()) {
+            MsgBox.alert(this, "Bạn không có quyền truy cập ");
+        } else{
         this.btn_CheckClickMenu = btn_MHN_NhanVien;
         this.sizeBorder = 0;
         hoverMenu(btn_MHN_NhanVien, 0);
@@ -491,7 +496,7 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
         MainPanel.getAccessibleContext();
         MainPanel.add(childPanel);
         MainPanel.validate();
-
+}
     }//GEN-LAST:event_btn_MHN_NhanVienActionPerformed
 
     private void btn_MHN_ThongKeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_MHN_ThongKeMouseMoved
@@ -508,12 +513,16 @@ public class frm_manhinhchinh extends javax.swing.JFrame {
         this.sizeBorder = 0;
         hoverMenu(btn_MHN_ThongKe,0);
         MainPanel.removeAll();
+         if (!Auth.isManager()) {
+            MsgBox.alert(this, "Bạn không có quyền truy cập ");
+        } else{
         childPanel = new pnl_ThongKe();
 
         MainPanel.getAccessibleContext();
         MainPanel.add(childPanel);
 
         MainPanel.validate();
+        }
     }//GEN-LAST:event_btn_MHN_ThongKeActionPerformed
 
     private void btnDanhSachDPMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDanhSachDPMouseMoved

@@ -19,7 +19,8 @@ public class Auth {
     public static boolean isLogin() {
         return Auth.user != null;
     }
+    // 1 la quan ly --  0 la nv
     public static boolean isManager() {
-        return Auth.isLogin() ;
+        return Auth.isLogin() && user.isChucVu(); 
     }
 }
