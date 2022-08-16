@@ -460,7 +460,7 @@ public class frm_XacNhanDangKyPhong extends javax.swing.JFrame {
             Phong ph = phdao1.selectebyID(txt_XacnhanDatPhong_SoPHong.getText());
             PhieuDangKi pdk3 = pdkdao.selectebyID(txt_XacnhanDatPhong_mapdk.getText());
             
-            if (ph.getTrangthai() == null) {
+            if (ph.getTrangthai() == null && pdk3.getTinhTrangCho()==1) {
                 
                 System.out.println("1111" + ph.getSoPhong() + ph.getTrangthai());
                  ph.setTrangthai("inUSE");

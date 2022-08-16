@@ -9,7 +9,10 @@ import com.qlks3tl.DAO.PhongDAO;
 import com.qlks3tl.Model.HoaDon;
 import com.qlks3tl.Model.PhieuDangKi;
 import com.qlks3tl.Model.Phong;
+import com.qlks3tl.utils.Auth;
 import com.qlks3tl.utils.MsgBox;
+import java.awt.Color;
+import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -33,9 +36,22 @@ public class frm_CapNhat extends javax.swing.JFrame {
     }
     public void init(){
         this.updateStatus();
+           designTable();
+       if (!Auth.isManager()) {
+            
+            btn_CNGP_capnhat.setEnabled(false);
+        } else{
+           btn_CNGP_capnhat.setEnabled(true);
+           
+       }
        // this.fillTable();
 
     }
+     void designTable() {
+        tbl_CNGP_DsdatPhong.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 18));
+        tbl_CNGP_DsdatPhong.getTableHeader().setForeground(Color.BLACK);
+     }
+    
    
     PhongDAO dao = new PhongDAO();
     PhieuDangKiDAO daopdk = new  PhieuDangKiDAO();
