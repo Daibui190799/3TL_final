@@ -9,10 +9,7 @@ import com.qlks3tl.DAO.PhongDAO;
 import com.qlks3tl.Model.HoaDon;
 import com.qlks3tl.Model.PhieuDangKi;
 import com.qlks3tl.Model.Phong;
-import com.qlks3tl.utils.Auth;
 import com.qlks3tl.utils.MsgBox;
-import java.awt.Color;
-import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -36,21 +33,9 @@ public class frm_CapNhat extends javax.swing.JFrame {
     }
     public void init(){
         this.updateStatus();
-        designTable();
-       if (!Auth.isManager()) {
-            
-            btn_CNGP_capnhat.setEnabled(false);
-        } else{
-           btn_CNGP_capnhat.setEnabled(true);
-           
-       }
        // this.fillTable();
 
     }
-     void designTable() {
-        tbl_CNGP_DsdatPhong.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 18));
-        tbl_CNGP_DsdatPhong.getTableHeader().setForeground(Color.BLACK);
-     }
    
     PhongDAO dao = new PhongDAO();
     PhieuDangKiDAO daopdk = new  PhieuDangKiDAO();
@@ -86,24 +71,44 @@ public class frm_CapNhat extends javax.swing.JFrame {
     }
     
        
-    public Phong edit(){
-        Phong p = new Phong();
+    public PhieuDangKi edit(){
+        PhieuDangKi pkdedit = new PhieuDangKi();
         if (row != -1) {
-            String SoPhong = (String) tbl_CNGP_DsdatPhong.getValueAt(this.row, 1);
+            int MaPDK = (int) tbl_CNGP_DsdatPhong.getValueAt(this.row,0 );
             tbl_CNGP_DsdatPhong.setRowSelectionInterval(row, row);
-            p = dao.selectebyID(SoPhong);
+            pkdedit = daopdk.selectbyMAPDK(MaPDK);
            
           
         }
-       return p;
+       return pkdedit;
     }
+    //show thông tin ngày ra, ngày vào của phòng đang sử dụng và đặt trước
+     void setForm(PhieuDangKi pdk){
+       
+       SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+	Date date = (daopdk.selectebyID(Integer.toString(pdk.getMaPDK()))).getNgayDK();
+        Date date1 = (daopdk.selectebyID(Integer.toString(pdk.getMaPDK()))).getNgayTra();
+	String dateFormat = formatter.format(date);
+        String dateFormat1 = formatter.format(date1);
+        
+      
+       
+        txt_CNGP_Ngayvao.setText(dateFormat);
+        txt_CNGP_Ngayra.setText(dateFormat1);
     
-     
-   
+    }
+    //cập nhật thông tin ngày ra, ngày vào của phòng đang sử dụng và đặt trước
+   /* PhieuDangKi getFormpdk(){
+        PhieuDangKi pdk = new PhieuDangKi();
+        pdk.setNgayDK(txt_ChitietPhong_giovao.getDate());
+     //   pdk.setNgayDK(txt_CNGP_Ngayvao.getDate());
+      //  pdk.setNgayTra(Date.valueOf(txt_CNGP_Ngayra.getDate()));   
+        return null;
+     }*/
 
     
     
-   void setForm(Phong p){
+    void setForm(Phong p){
        
        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 	Date date = daopdk.selectebySP(p.getSoPhong()).getNgayDK();
@@ -123,12 +128,10 @@ public class frm_CapNhat extends javax.swing.JFrame {
     
     Phong getForm(){
         Phong p = new Phong();
-        PhieuDangKi pdk = new PhieuDangKi();
+      
         p.setGiaPhong_Ngay(Double.valueOf(txt_CNGP_GiaPNgay.getText()));
         p.setGiaPhong_Gio(Double.valueOf(txt_CNGP_GiaPGio.getText()));   
-       // pdk.setNgayDK((txt_CNGP_Ngayvao.getText()));
-     //   pdk.setNgayTra(Int.valueOf(txt_CNGP_Ngayra.getText()));
-
+       
         return p;
     }
     
@@ -395,7 +398,6 @@ public class frm_CapNhat extends javax.swing.JFrame {
             }
         });
 
-        tbl_CNGP_DsdatPhong.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(168, 222, 247), 4, true));
         tbl_CNGP_DsdatPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -407,10 +409,6 @@ public class frm_CapNhat extends javax.swing.JFrame {
                 "Mã PDK", "Số Phòng", "CMND", "Ngày vào", "Ngày ra", "Giờ vào", "Giờ ra", "Trạng Thái", "Tình Trạng Chờ"
             }
         ));
-        tbl_CNGP_DsdatPhong.setGridColor(new java.awt.Color(150, 196, 200));
-        tbl_CNGP_DsdatPhong.setRowHeight(27);
-        tbl_CNGP_DsdatPhong.setRowMargin(3);
-        tbl_CNGP_DsdatPhong.setSelectionBackground(new java.awt.Color(150, 196, 200));
         tbl_CNGP_DsdatPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_CNGP_DsdatPhongMouseClicked(evt);
@@ -473,7 +471,6 @@ public class frm_CapNhat extends javax.swing.JFrame {
 
     private void btn_CNGP_capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CNGP_capnhatActionPerformed
         // TODO add your handling code here:
-        
         update();
     }//GEN-LAST:event_btn_CNGP_capnhatActionPerformed
 
@@ -481,15 +478,19 @@ public class frm_CapNhat extends javax.swing.JFrame {
         
         if(evt.getClickCount() == 1){
         
-            Phong p = new Phong();
+            
             PhieuDangKi pdk = new PhieuDangKi();
             this.row = tbl_CNGP_DsdatPhong.getSelectedRow();
-            p = this.edit();  
+           // pdk = this.edit();
+      
             DefaultTableModel model = (DefaultTableModel) tbl_CNGP_DsdatPhong.getModel();
             int value = (int) model.getValueAt(row, 8 );
             
+            
+            
             if(value ==  1){
-                this.setForm(p);
+                pdk = this.edit();
+                this.setForm(pdk);
                 this.updateStatus1();
              
             }else{
@@ -523,6 +524,70 @@ public class frm_CapNhat extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(frm_CapNhat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
