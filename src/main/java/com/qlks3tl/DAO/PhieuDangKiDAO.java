@@ -153,5 +153,35 @@ public List<Object[]> getDulieuPDk(Integer maPDK){
     return list;
     
 }
+
+ public List<Object[]> selectebySP2(String SoPhong){
+        List<Object[]> list = new ArrayList();
+        try {
+            ResultSet rs = null;
+            try {
+                String sql = "{call sp_pdk (?)}";
+             rs = XJdbc.query(sql, SoPhong);
+             while (rs.next()){
+                 Object[] model = {
+                    rs.getInt("MaPDK"),
+                    rs.getString("SoPhong"),
+                    rs.getString("CMND"),
+                    rs.getDate("Ngay_Checkin"),
+                    rs.getDate("Ngay_Checkout"),
+                    rs.getString("GioVao"),
+                    rs.getString("GioRa"),
+                    rs.getString("TinhTrang"),
+                    rs.getInt("TinhTrangCho")
+                 };
+                 list.add(model);
+             }
+             } finally  {
+            rs.getStatement().getConnection().close();
+        }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
     
 }

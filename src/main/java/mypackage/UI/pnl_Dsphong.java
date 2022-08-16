@@ -5,7 +5,9 @@
  */
 package mypackage.UI;
 
+import com.qlks3tl.DAO.PhieuDangKiDAO;
 import com.qlks3tl.DAO.PhongDAO;
+import com.qlks3tl.Model.PhieuDangKi;
 import com.qlks3tl.Model.Phong;
 import com.qlks3tl.utils.MsgBox;
 import java.awt.Color;
@@ -36,6 +38,7 @@ public class pnl_Dsphong extends javax.swing.JPanel {
      
     int row = -1;
     PhongDAO dao = new PhongDAO();
+    PhieuDangKiDAO daopdk = new  PhieuDangKiDAO();
     
     void fillTable(){
         DefaultTableModel model = (DefaultTableModel) tbl_DSPhong_DSPhong.getModel();
@@ -64,6 +67,16 @@ public class pnl_Dsphong extends javax.swing.JPanel {
             p = dao.selectebyID(SoPhong);
         }
        return p;
+    }
+    
+     public PhieuDangKi editpdk(){
+        PhieuDangKi pdka = new PhieuDangKi();
+        if (row != -1) {
+            String SoPhong = (String) tbl_DSPhong_DSPhong.getValueAt(this.row, 1);
+            tbl_DSPhong_DSPhong.setRowSelectionInterval(row, row);
+            pdka = daopdk.selectebySP(SoPhong);
+        }
+       return pdka;
     }
       
       
@@ -120,13 +133,13 @@ public class pnl_Dsphong extends javax.swing.JPanel {
         tbl_DSPhong_DSPhong.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tbl_DSPhong_DSPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Số phòng", "Mã loại phòng", "Giá Phòng_Ngày", "Giá Phòng_Giờ", "Trạng thái"
+                "Số phòng", "Mã loại phòng", "Giá Phòng_Ngày", "Giá Phòng_Giờ"
             }
         ));
         tbl_DSPhong_DSPhong.setFocusable(false);
@@ -183,17 +196,15 @@ public class pnl_Dsphong extends javax.swing.JPanel {
     private void tbl_DSPhong_DSPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_DSPhong_DSPhongMouseClicked
     
         if (evt.getClickCount() == 1) {
-           Phong p = new Phong();
+            Phong p = new Phong();
+            PhieuDangKi pdka = new PhieuDangKi();
             this.row = tbl_DSPhong_DSPhong.getSelectedRow();
             p = this.edit();
-        
-            if(p.getTrangthai() == null){
-                frm_CapNhat cn = new frm_CapNhat();
-                cn.setVisible(true);
-                cn.setForm(p);    
-       }else{
-           MsgBox.alert(this,"Phòng đang sử dụng không được cập nhật!!!");
-       }
+            pdka = this.editpdk();
+            frm_CapNhat cn = new frm_CapNhat();
+            cn.setVisible(true);
+            cn.setForm(p);
+            cn.fillTable(pdka);
         }  
     }//GEN-LAST:event_tbl_DSPhong_DSPhongMouseClicked
 
