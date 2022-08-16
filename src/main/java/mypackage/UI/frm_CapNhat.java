@@ -467,7 +467,7 @@ public class frm_CapNhat extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) tbl_CNGP_DsdatPhong.getModel();
             int value = (int) model.getValueAt(row, 8 );
             
-            if(value ==  0){
+            if(value ==  1){
                 this.setForm(p);
                 this.updateStatus1();
              
