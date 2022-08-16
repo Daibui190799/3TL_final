@@ -436,7 +436,9 @@ public class frm_ChitietPhong extends javax.swing.JFrame {
                 phong = phdao1.selectebyID(hd.getSoPhong());
                 phong.setTrangthai(null);
                 pdk.setTinhTrangHoaDon(1);
+                
                 phdao1.update(phong);
+                pdkDAO.update(pdk);
                 dispose();
            } catch (Exception e) {
                MsgBox.alert(this, "Thanh Toán Thất Bại!!!");
@@ -648,7 +650,7 @@ void init() {
 
     PhieuDangKi getForm() {
         PhieuDangKi nv = new PhieuDangKi();
-        int songay1 =(int) (songay*24 + tongsogio) ;
+        int songay1 =(int)(songay*24 + tongsogio) ;
         nv.setTenKH(txt_ChitietPhong_TenKH.getText());
         nv.setSoPhong(txt_ChitietPhong_SoPhong.getText());
         nv.setLoaiPhong(txt_ChitietPhong_LoaiPhong.getText());

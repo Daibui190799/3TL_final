@@ -149,6 +149,8 @@ public class frm_PhieuDangKy extends javax.swing.JFrame {
 
         txt_Phieudk_LoaiPhong.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        txt_GioTra.setText("11:00");
+
         btn_PhieuDK_DatPhong.setBackground(new java.awt.Color(99, 99, 198));
         btn_PhieuDK_DatPhong.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         btn_PhieuDK_DatPhong.setForeground(new java.awt.Color(255, 255, 255));
@@ -191,7 +193,7 @@ public class frm_PhieuDangKy extends javax.swing.JFrame {
                             .addComponent(txt_Phieudk_LoaiPhong))
                         .addGap(36, 36, 36)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_GioDK, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                            .addComponent(txt_GioDK)
                             .addComponent(txt_GioTra))
                         .addGap(0, 123, Short.MAX_VALUE)))
                 .addContainerGap())
